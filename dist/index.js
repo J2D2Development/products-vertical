@@ -51,6 +51,7 @@ app.component('homeView', {
 });
 
 app.controller('searchCtrl', function($scope) {
+    console.log('search ctrl loaded');
     this.searchTerm = '';
     this.searchShow = false;
     this.resetSearch = function() {
@@ -58,6 +59,7 @@ app.controller('searchCtrl', function($scope) {
     }
     this.showSearch = function(action) {
       this.searchShow = action;
+      console.log('this.searchShow:', this.searchShow);
     }
 });
 
