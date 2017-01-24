@@ -16,6 +16,15 @@ UP NEXT
   -view all goes to category list, click one, get all prods in that category (or all), click link, get product)
   -let us help- guided tour
 5) https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions#how-to-animate-ui-view-with-ng-animate
+
+
+EVENTUALLY
+1) production build
+  -Sass -> Css
+    http://stackoverflow.com/questions/29210325/webpack-sass-where-is-the-css-file
+    https://github.com/jtangelder/sass-loader
+    https://github.com/webpack/extract-text-webpack-plugin
+
 */
 
 const categories = [ 'Accounting', 'Bank Operations', 'Central Bank Operations', 'General Operations', 'Investment Management', 'Loans', 'Real Estate', 'Trust', 'Services and Software Features', ];
