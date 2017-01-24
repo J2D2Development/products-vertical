@@ -1,0 +1,13 @@
+<div class="feature-cards-wrapper">
+    <div class="card-mid--wrapper" ng-repeat="feature in $ctrl.features">
+        <div class="card-mid">
+            <div class="card-mid--headline">{{feature.name}}</div>
+            <div class="card-mid--main">{{feature.description}}</div>
+            <div class="card-mid--links">
+                <a ui-sref="home.category.product({productPath: feature.route})" ui-sref-active="active">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ui-view></ui-view>

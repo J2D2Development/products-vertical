@@ -5,9 +5,18 @@
   align-items: flex-start;
   margin-top: 36px;
   
+  .card-mid--wrapper {
+    width: 33%;
+    display: flex;
+    margin: 6px 0 6px 0;
+    min-width: 250px;
+  }
   .card-mid {
-    width: 30%;
-    margin: 6px;
+    width: 95%;
+    margin: 0px auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
     min-width: 250px;
     background-color: #fff;
     padding: 12px;

@@ -15,20 +15,8 @@ html, body {
   background-color: #ccc;
 }
 
-.menu-wrapper {
-  max-width: 100%;
-  background-color: $main-color;
-  color: $main-text;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 65px;
-  
-  h1 {
-    font-weight: 100;
-    margin: 0;
-    padding: 16px;
-  }
+h1 {
+  font-weight: normal;
 }
 h2 {
   font-weight: normal;
@@ -36,37 +24,32 @@ h2 {
 .outer-wrapper {
   min-height: 100%;
 }
-.menu-tabs {
-  position: relative;
-  width: 50%;
-  min-width: 300px;
-  overflow: hidden;
-  list-style-type: none;
+
+.menu-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   margin: 0;
-  padding: 0;
-  display: flex;
-  height: 100%;
-  min-height: 100%;
-  justify-content: flex-end;
-  align-items: center;
-  
-  li {
-    text-align: center;
-    overflow: hidden;
-    height: 100%;
-    min-height: 100%;
+  background-color: $main-color;
+  color: $main-text;
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0;
   }
   a {
-    color: inherit;
+    color: $main-text;
     text-decoration: none;
+    padding: 12px;
+    font-size: 1.15em;
     display: flex;
-    padding: 0 6px 0 6px;
     justify-content: center;
     align-items: center;
-    font-size: 1.25em;
-    height: 100%;
-    min-height: 100%;
-    cursor: pointer;
     transition: background-color 0.3s;
   }
   a:hover {
@@ -74,60 +57,29 @@ h2 {
   }
 }
 
-.search-wrapper {
-  position: absolute;
-  min-height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  font-size: 1.25em;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  background-color: #3F51B5;
-  transform: scale(0);
-  transition: transform 0.7s ease;
+.main-wrapper {
+  margin-top: 50px;
+}
 
-  input[type=text] {
-    font-weight: 100;
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 15%;
+
+  input[type=text]  {
+    background-color: #FFFFFF;
+    color: $main-color;
     border: 0;
-    font-size: 1.5em;
-    color: #FFFFFF;
-    background-color: inherit;
-    width: 95%;
-    padding: 12px;
+    padding: 6px;
+    font-size: 2.5em;
   }
   input[type=text]:focus {
     outline: 0;
   }
 }
 
-.showSearchBar {
-  transform: scale(1);
-}
-
-.cancel-search {
-  font-size: 1.25em;
-  color: #ccc;
-  position: absolute;
-  right: 15px;
-}
-.close-search {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 3px;
-  background-color: rgba(0,0,0,0.1);
-  position: absolute;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-  
-  .fa {
-    transform: rotate(0);
-    transition: transform 0.3s 0.8s;
-  }
-}
 
 .rotate-right {
   transform: rotate(180deg)!important;

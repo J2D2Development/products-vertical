@@ -11,25 +11,7 @@
     </head>
     <body>
         <div class="outer-wrapper" ng-app="app">
-        <div class="menu-wrapper">
-            <h1>Our Products</h1>
-            <ul class="menu-tabs" ng-controller="searchCtrl as s">
-                <li>
-                    <a ng-click="s.showSearch(true)">
-                        Search
-                    </a>
-                    <div class="search-wrapper" ng-class="{'showSearchBar': s.searchShow===true}">
-                        <div title="Close" class="close-search" ng-click="s.showSearch(false)">
-                            <i class="fa fa-chevron-left" ng-class="{'rotate-right': s.searchShow===true}" aria-hidden="true"></i>
-                        </div>
-                        <input type="text" ng-model="s.searchTerm" placeholder="Enter Search Term" autofocus /><i ng-if="s.searchTerm!==''" class="fa fa-window-close cancel-search" aria-hidden="true" ng-click="s.resetSearch()"></i>
-                    </div>
-                </li>
-            </ul>
-        </div>
             <ui-view></ui-view>
-            </div>
-        </div>
         </div>
     </body>
 </html>
