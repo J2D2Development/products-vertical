@@ -1,19 +1,17 @@
 import './styles/app.scss';
 import products from './products.js';
+import categories from './categories.js';
 
 /*
 UP NEXT
--fix routing in category state (should be category/product instead of showing all on first load)
-  -click view all- goes to 'categories' state- then click category, goes to 'categories/{category} state, then click product, goes to 'categories/{category}/{product} state.  will this work with search and other states?  I think so
--fix routing on search results: links not getting proper params?
+-figure out animation of routes- if a user chooses a category, it should shrink and slide up/left (others hide).  if a user chooses a product, it should shrink and slide next to category (others hide)- clearing the way for the main product desc.  maybe have a 'clear' button on selected prod/category to go back to main view for each?  then when search is performed, it should just jump straight to that view (may have to make entire card a 'link' so the styles apply properly?)
 
 
 1) add loading spinner
 2) implement search function- show options of features as typing?
   -simple index of check- improve this
+3) for animation of selected category, then feature- can we use ui-sref-active?  if applied, keep around but move- otherwise, make small and move?  Or- set a var on the controller and link to each element in repeated grid.  If selected matches element route, use that to keep and !that to make small/hide
 4) home: 3 tabs: search, view all, let us help
-  -search shows search input, below that is live reload as type of products (filter over json for title, desc, category)
-  -view all goes to category list, click one, get all prods in that category (or all), click link, get product)
   -let us help- guided tour
 5) https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions#how-to-animate-ui-view-with-ng-animate
 
@@ -27,7 +25,7 @@ EVENTUALLY
 
 */
 
-const categories = [ 'Accounting', 'Bank Operations', 'Central Bank Operations', 'General Operations', 'Investment Management', 'Loans', 'Real Estate', 'Trust', 'Services and Software Features', ];
+
 const industries = [ 'Brokerage Firms', 'Central Banks', 'Commercial Banks', 'Corporations', 'Fund Managers', 'Insurance Companies', 'Investment Managers', 'Municipalities', 'Real Estate', 'RTA (Registrar / Transfer / Paying Agent)' ];
 
 const app = angular.module('app', ['ui.router']);
@@ -61,8 +59,19 @@ app.config(function($stateProvider) {
     component: 'guideView'
   }
 
+  const categoriesState = {
+    name: 'home.categories',
+    url: '/categories',
+    component: 'categoriesView',
+    resolve: {
+      categories: function() {
+        return categories;
+      }
+    }
+  }
+
   const categoryState = {
-    name: 'home.category',
+    name: 'home.categories.category',
     url: '/{category}',
     component: 'categoryView',
     resolve: {
@@ -74,7 +83,7 @@ app.config(function($stateProvider) {
   }
   
   const productState = {
-    name: 'home.category.product',
+    name: 'home.categories.category.product',
     url: '/{productPath}',
     component: 'productDetails',
     resolve: {
@@ -89,6 +98,7 @@ app.config(function($stateProvider) {
   $stateProvider.state(homeState);
   $stateProvider.state(searchState);
   $stateProvider.state(guideState);
+  $stateProvider.state(categoriesState);
   $stateProvider.state(categoryState);
   $stateProvider.state(productState);
 });
@@ -110,6 +120,7 @@ app.component('searchView', {
     this.fireSearch = function() {
       this.results = this.features.filter(feature => {
         const term = this.searchTerm.toLowerCase();
+        if(!term) return;
         const name = feature.name.toLowerCase();
         const desc = feature.description.toLowerCase();
         const category = feature.category.toLowerCase();
@@ -135,6 +146,14 @@ app.directive('searchResults', function() {
 app.component('guideView', {
   templateUrl: './public/templates/guide-home.html',
   controller: function() {
+  }
+});
+
+app.component('categoriesView', {
+  bindings: {categories: '<'},
+  templateUrl: './public/templates/categories.html',
+  controller: function() {
+    //this.cat = $stateParams.category;
   }
 });
 

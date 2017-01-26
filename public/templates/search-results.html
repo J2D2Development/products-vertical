@@ -4,7 +4,7 @@
             <div class="card-mid--headline">{{product.name}}</div>
             <div class="card-mid--main">{{product.description}}</div>
             <div class="card-mid--links">
-                <a ui-sref="home.category.product({productPath: product.route})" ui-sref-active="active">Details</a>
+                <a ui-sref="home.categories.category.product({category: product.categoryRoute, productPath: product.route})" ui-sref-active="active">Details</a>
             </div>
         </div>
     </div>

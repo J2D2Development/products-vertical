@@ -1,0 +1,13 @@
+<h1>Categories</h1>
+<div class="feature-cards-wrapper">
+    <div class="card-mid--wrapper" ng-repeat="category in $ctrl.categories">
+        <div class="card-mid">
+            <div class="card-mid--headline">{{category.name}}</div>
+            <div class="card-mid--main">{{category.description}}</div>
+            <div class="card-mid--links">
+                <a ui-sref="home.categories.category({category: category.route})" ui-sref-active="active">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<ui-view></ui-view>
