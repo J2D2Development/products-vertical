@@ -1,11 +1,12 @@
-<h1>Categories</h1>
-<div class="feature-cards-wrapper">
-    <div class="card-mid--wrapper" ng-repeat="category in $ctrl.categories">
+<div class="feature-cards-wrapper" ng-class="{'active-category-wrapper': $ctrl.activeCategory!==''}">
+    <div ng-repeat="category in $ctrl.categories" class="card-mid--wrapper" 
+        ng-class="{'active-category': $ctrl.activeCategory===category.route, 'inactive-category': ($ctrl.activeCategory!==category.route && $ctrl.activeCategory!=='')}">
         <div class="card-mid">
             <div class="card-mid--headline">{{category.name}}</div>
             <div class="card-mid--main">{{category.description}}</div>
             <div class="card-mid--links">
-                <a ui-sref="home.categories.category({category: category.route})" ui-sref-active="active">Details</a>
+                <a ui-sref="home.categories" ng-if="$ctrl.activeCategory===category.route">Clear</a>
+                <a ui-sref="home.categories.category({category: category.route})">Details</a>
             </div>
         </div>
     </div>

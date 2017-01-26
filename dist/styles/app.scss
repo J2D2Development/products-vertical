@@ -34,6 +34,7 @@ h2 {
   margin: 0;
   background-color: $main-color;
   color: $main-text;
+  z-index: 99;
 
   ul {
     list-style-type: none;

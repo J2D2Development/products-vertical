@@ -4,12 +4,15 @@
   justify-content: space-around;
   align-items: flex-start;
   margin-top: 36px;
+  position: relative;
   
   .card-mid--wrapper {
     width: 33%;
     display: flex;
     margin: 6px 0 6px 0;
     min-width: 250px;
+    transform: translateY(0);
+    transition: transform 1s ease;
   }
   .card-mid {
     width: 95%;
@@ -50,8 +53,6 @@
   margin: 36px auto 36px auto;
   
   .card-full {
-    height: 100%;
-    min-height: 100%;
     background-color: #fff;
     padding: 12px;
     border-radius: 3px;
@@ -77,4 +78,25 @@
       color: $main-color;
     }
   }
+}
+
+.active-category-wrapper {
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+}
+.active-category {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.inactive-category {
+  transform: translateY(-500%) !important;
+  transition: transform 1s ease;
+}
+//https://docs.angularjs.org/api/ngAnimate#css-staggering-animations
+.inactive-category.ng-enter-stagger {
+  transition-delay: 0.3s;
+  animation-delay: 0.3s;
+  transition-duration: 0s;
 }

@@ -5,6 +5,7 @@ import categories from './categories.js';
 /*
 UP NEXT
 -figure out animation of routes- if a user chooses a category, it should shrink and slide up/left (others hide).  if a user chooses a product, it should shrink and slide next to category (others hide)- clearing the way for the main product desc.  maybe have a 'clear' button on selected prod/category to go back to main view for each?  then when search is performed, it should just jump straight to that view (may have to make entire card a 'link' so the styles apply properly?)
+  -getting there- need better positioning on the 'active' category: just jumps to top left, but is there a way to animate that properly?- slide it up/left to position 0,0? maybe a tick after the rest fly away?
 
 
 1) add loading spinner
@@ -152,8 +153,13 @@ app.component('guideView', {
 app.component('categoriesView', {
   bindings: {categories: '<'},
   templateUrl: './public/templates/categories.html',
-  controller: function() {
-    //this.cat = $stateParams.category;
+  controller: function($stateParams, $rootScope, $location) {
+    this.activeCategory = $stateParams.category ? $stateParams.category : '';
+    $rootScope.$on('$locationChangeSuccess', () => {
+      //console.log('path?', $location.path());
+      //console.log('state params:', $stateParams);
+      this.activeCategory = $stateParams.category ? $stateParams.category : '';
+    });
   }
 });
 
@@ -168,9 +174,7 @@ app.component('categoryView', {
 app.component('productDetails', {
   bindings: {product: '<'},
   template: '<div class="feature-card-wrapper"><div class="card-full"><div class="card-full--headline">{{$ctrl.product.name}}</div><div class="card-full--main">{{$ctrl.product.description}}</div><div class="card-full--links"><a ui-sref="">Back</a></div></div></div>',
-  controller: function($state) {
-    console.log('details state:', $state);
-    console.log('details products:', this.product);
+  controller: function() {
   }
 });
 
@@ -186,17 +190,9 @@ app.component('productDetails', {
 
 function getFeatures(filterFeaturesBy) {
   if(filterFeaturesBy) {
-    console.log('filter features by:', filterFeaturesBy);
-    let p = products.filter(function(product) {
+    return products.filter(function(product) {
       return product.categoryRoute === filterFeaturesBy;
     });
-    console.log('products:', p);
-    return p;
   }
   return products;
 }
-
-
-
-//old category view
-// '<div class="feature-cards-wrapper"><div class="card-mid" ng-repeat="feature in $ctrl.features"><div class="card-mid--headline">{{feature.name}}</div><div class="card-mid--main">{{feature.shortDescription}}</div><div class="card-mid--links"><a ui-sref="home.category.product({category: feature.category, productId: feature.id})" ui-sref-active="active">Details</a></div></div></div><ui-view></ui-view>'
