@@ -4,6 +4,7 @@
             <div class="card-mid--headline">{{feature.name}}</div>
             <div class="card-mid--main">{{feature.description}}</div>
             <div class="card-mid--links">
+                <a ui-sref="home.categories.category({category: feature.categoryRoute})">Clear</a>
                 <a ui-sref="home.categories.category.product({productPath: feature.route})" ui-sref-active="active">Details</a>
             </div>
         </div>

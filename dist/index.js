@@ -6,6 +6,7 @@ import categories from './categories.js';
 UP NEXT
 -figure out animation of routes- if a user chooses a category, it should shrink and slide up/left (others hide).  if a user chooses a product, it should shrink and slide next to category (others hide)- clearing the way for the main product desc.  maybe have a 'clear' button on selected prod/category to go back to main view for each?  then when search is performed, it should just jump straight to that view (may have to make entire card a 'link' so the styles apply properly?)
   -getting there- need better positioning on the 'active' category: just jumps to top left, but is there a way to animate that properly?- slide it up/left to position 0,0? maybe a tick after the rest fly away?
+  -new method seems to work on page load and manipulation on 'category' view, but if going to search, then back to category, animation never fires.  also need to find way to fix layout once choices are made (switch from vertical layout to horizontal for the fewer options, make smaller, then have full text below).
 
 
 1) add loading spinner
@@ -29,7 +30,7 @@ EVENTUALLY
 
 const industries = [ 'Brokerage Firms', 'Central Banks', 'Commercial Banks', 'Corporations', 'Fund Managers', 'Insurance Companies', 'Investment Managers', 'Municipalities', 'Real Estate', 'RTA (Registrar / Transfer / Paying Agent)' ];
 
-const app = angular.module('app', ['ui.router']);
+const app = angular.module('app', ['ui.router', 'ngAnimate']);
 
 app.config(function($stateProvider) {
   const homeState = {
@@ -153,12 +154,24 @@ app.component('guideView', {
 app.component('categoriesView', {
   bindings: {categories: '<'},
   templateUrl: './public/templates/categories.html',
-  controller: function($stateParams, $rootScope, $location) {
-    this.activeCategory = $stateParams.category ? $stateParams.category : '';
+  controller: function($stateParams, $rootScope) {
+    this.originalCategories = this.categories;
+    if($stateParams.category) {
+      this.categories = this.categories.filter(category => {
+        return category.route === $stateParams.category;
+      });
+    } else {
+      this.categories = this.originalCategories;
+    }
+
     $rootScope.$on('$locationChangeSuccess', () => {
-      //console.log('path?', $location.path());
-      //console.log('state params:', $stateParams);
-      this.activeCategory = $stateParams.category ? $stateParams.category : '';
+      if($stateParams.category) {
+        this.categories = this.categories.filter(category => {
+          return category.route === $stateParams.category;
+        });
+      } else {
+        this.categories = this.originalCategories;
+      }
     });
   }
 });
@@ -166,15 +179,33 @@ app.component('categoriesView', {
 app.component('categoryView', {
   bindings: {features: '<'},
   templateUrl: './public/templates/category.html',
-  controller: function($stateParams) {
-    this.cat = $stateParams.category;
+  controller: function($stateParams, $rootScope) {
+    this.originalFeatures = this.features;
+    if($stateParams.productPath) {
+      this.features = this.features.filter(feature => {
+        return feature.route === $stateParams.productPath;
+      });
+    } else {
+      this.features = this.originalFeatures;
+    }
+
+    $rootScope.$on('$locationChangeSuccess', () => {
+      if($stateParams.productPath) {
+      this.features = this.features.filter(feature => {
+        return feature.route === $stateParams.productPath;
+      });
+    } else {
+      this.features = this.originalFeatures;
+    }
+    });
   }
 });
 
 app.component('productDetails', {
   bindings: {product: '<'},
   template: '<div class="feature-card-wrapper"><div class="card-full"><div class="card-full--headline">{{$ctrl.product.name}}</div><div class="card-full--main">{{$ctrl.product.description}}</div><div class="card-full--links"><a ui-sref="">Back</a></div></div></div>',
-  controller: function() {
+  controller: function($stateParams, $rootScope) {
+    
   }
 });
 
