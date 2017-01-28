@@ -2,9 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: flex-start;
-  margin-top: 36px;
-  position: relative;
+  align-items: stretch;
   
   .card-mid--wrapper {
     width: 33%;
@@ -16,33 +14,34 @@
   //https://docs.angularjs.org/api/ngAnimate#css-staggering-animations
   .card-mid--wrapper.ng-enter {
     opacity: 0;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease, opacity 0.5s ease;
+    transform: scale(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
   .card-mid--wrapper.ng-enter-stagger {
-    transition-delay: 0.2s;
+    transition-delay: 0.1s;
     animation-delay: 0.12s;
     transition-duration: 0s;
   }
   .card-mid--wrapper.ng-enter.ng-enter-active {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
   .card-mid--wrapper.ng-leave {
     opacity: 1;
-    transform: translateY(0);
-    transition: transform 0.3s ease, opacity 0.5s ease;
+    transform: scale(1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
   // .card-mid--wrapper.ng-leave-stagger {
-  //   transition-delay: 0.2s;
+  //   transition-delay: 0.1s;
   //   animation-delay: 0.12s;
   //   transition-duration: 0s;
   // }
   .card-mid--wrapper.ng-leave.ng-leave-active {
     opacity: 0;
-    transform: translateY(-100%);
+    transform: scale(0);
   }
   .card-mid {
+    position: relative;
     width: 95%;
     margin: 0px auto;
     text-align: left;
@@ -61,10 +60,12 @@
   }
   .card-mid--main {
     color: #333;
-    margin-bottom: 12px;
+    padding-bottom: 24px;
   }
   .card-mid--links {
-    text-align: right;
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
     
     a {
       color: $main-color--light;

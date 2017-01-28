@@ -59,7 +59,10 @@ h2 {
 }
 
 .main-wrapper {
-  margin-top: 50px;
+  padding-top: 75px;
+  position: relative;
+  min-height: 100%;
+  overflow-x: hidden;
   display: flex;
 }
 
@@ -89,4 +92,35 @@ h2 {
 .active {
   background-color: #3F51B5;
   color: #ffffff !important;
+}
+.hide-link {
+  display: none;
+}
+.hide-fucking-link {
+  display: none !important;
+}
+.show-link {
+  display: block !important;
+}
+
+ .outer-ui-wrapper{
+  position: absolute;
+  padding: 0 16px 0 16px;
+  width: 100%;
+  transition: transform 1s ease;
+}
+.outer-ui-wrapper.ng-enter {
+  transform: translateX(-100%);
+  transition: transform 1s ease;
+}
+.outer-ui-wrapper.ng-enter.ng-enter-active {
+  transform: translateX(0);
+  transition: transform 1s ease;
+}
+.outer-ui-wrapper.ng-leave {
+  transform: translateX(0);
+  transition: transform 1s ease;
+}
+.outer-ui-wrapper.ng-leave.ng-leave-active {
+  transform: translateX(100%);
 }

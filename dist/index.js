@@ -209,14 +209,16 @@ app.component('productDetails', {
   }
 });
 
-// app.run(function($rootScope, $location) {
-//   console.log('in run, rootscope:', $rootScope);
-//   $rootScope.$on('$locationChangeSuccess', function() {
-//     $rootScope.showDetails = false;
-//     if($location.path() && $location.path() !== '/search') {
-//       $rootScope.showDetails = true;
-//     }
-//   });
+// app.run(function($rootScope, $stateParams) {
+//   $rootScope.$on('$locationChangeSuccess', () => {
+//       if($stateParams.category) {
+//         this.categories = this.categories.filter(category => {
+//           return category.route === $stateParams.category;
+//         });
+//       } else {
+//         this.categories = this.originalCategories;
+//       }
+//     });
 // });
 
 function getFeatures(filterFeaturesBy) {
